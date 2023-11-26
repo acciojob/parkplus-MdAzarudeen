@@ -9,7 +9,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     private String name;
-    private String  contact;
+    private String  phoneNumber;
     private String password;
     @OneToMany
     private List<Reservation> reservationList;
@@ -17,10 +17,10 @@ public class User {
     public User() {
     }
 
-    public User(int id, String name, String contact, String password, List<Reservation> reservationList) {
+    public User(int id, String name, String phoneNumber, String password, List<Reservation> reservationList) {
         this.id = id;
         this.name = name;
-        this.contact = contact;
+        this.phoneNumber = phoneNumber;
         this.password = password;
         this.reservationList = reservationList;
     }
@@ -41,12 +41,12 @@ public class User {
         this.name = name;
     }
 
-    public String getContact() {
-        return contact;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setContact(String contact) {
-        this.contact = contact;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getPassword() {
