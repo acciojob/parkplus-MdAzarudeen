@@ -28,7 +28,7 @@ public class ReservationServiceImpl implements ReservationService {
             ParkingLot parkingLot = parkingLotRepository3.findById(parkingLotId).get();
         if(parkingLot==null || user==null )
         {
-            throw new CannotMakeReservationException(String.format("Cannot Make Reservation"));
+            throw new CannotMakeReservationException(String.format("Cannot make reservation"));
         }
             Spot spot = null;
             List<Spot> spotList = parkingLot.getSpotList();
@@ -53,7 +53,7 @@ public class ReservationServiceImpl implements ReservationService {
         }
         if(spot==null )
         {
-            throw new CannotMakeReservationException(String.format("Cannot Make Reservation"));
+            throw new CannotMakeReservationException(String.format("Cannot make reservation"));
         }
 
         Reservation reservation = new Reservation();
