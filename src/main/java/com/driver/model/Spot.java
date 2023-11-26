@@ -13,7 +13,7 @@ public class Spot {
     private boolean occupied=false;
     @ManyToOne
     private ParkingLot parkingLot;
-    @OneToMany
+    @OneToMany(mappedBy = "spot", cascade = CascadeType.ALL)
     private List<Reservation> reservationList;
 
     public Spot() {
@@ -48,8 +48,8 @@ public class Spot {
         return pricePerHour;
     }
 
-    public void setPricePerHour(int price) {
-        this.pricePerHour = price;
+    public void setPricePerHour(int pricePerHour) {
+        this.pricePerHour = pricePerHour;
     }
 
     public boolean getOccupied() {

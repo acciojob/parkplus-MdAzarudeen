@@ -12,7 +12,7 @@ public class Reservation {
     private User user;
     @ManyToOne
     private Spot spot;
-    @OneToOne
+    @OneToOne(mappedBy = "reservation", cascade = CascadeType.ALL)
     private Payment payment;
 
     public Reservation() {

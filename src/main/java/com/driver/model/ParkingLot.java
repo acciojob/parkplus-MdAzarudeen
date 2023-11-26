@@ -10,7 +10,7 @@ public class ParkingLot {
     int id;
     private String name;
     private String address;
-    @OneToMany
+    @OneToMany(mappedBy = "parkingLot", cascade = CascadeType.ALL)
     private List<Spot> spotList;
 
     public ParkingLot() {

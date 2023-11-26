@@ -11,7 +11,7 @@ public class User {
     private String name;
     private String  phoneNumber;
     private String password;
-    @OneToMany
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Reservation> reservationList;
 
     public User() {
