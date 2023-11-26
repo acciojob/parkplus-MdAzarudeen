@@ -1,6 +1,5 @@
 package com.driver.controllers;
 
-import com.driver.Exception.CannotMakeReservationException;
 import com.driver.model.Reservation;
 import com.driver.services.impl.ReservationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +18,8 @@ public class ReservationController {
         //Reserve a spot in the given parkingLot such that the total price is minimum. Note that the price per hour for each spot is different
         //Note that the vehicle can only be parked in a spot having a type equal to or larger than given vehicle
         //If parkingLot is not found, user is not found, or no spot is available, throw "Cannot make reservation" exception.
-//        try{
-          return reservationService.reserveSpot(userId,parkingLotId,timeInHours,numberOfWheels);
-//        }catch (CannotMakeReservationException e){
-//            e.getMessage();
-//        }
+
+          Reservation reservation = reservationService.reserveSpot(userId,parkingLotId,timeInHours,numberOfWheels);
+          return reservation;
     }
 }

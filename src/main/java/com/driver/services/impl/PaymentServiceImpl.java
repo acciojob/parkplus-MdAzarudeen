@@ -1,8 +1,5 @@
 package com.driver.services.impl;
 
-import com.driver.Exception.CannotMakeReservationException;
-import com.driver.Exception.InsufficientAmountException;
-import com.driver.Exception.PaymentNotDetectedException;
 import com.driver.model.Payment;
 import com.driver.model.PaymentMode;
 import com.driver.model.Reservation;
@@ -13,8 +10,6 @@ import com.driver.services.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Locale;
-
 @Service
 public class PaymentServiceImpl implements PaymentService {
     @Autowired
@@ -24,10 +19,14 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public Payment pay(Integer reservationId, int amountSent, String mode) throws Exception {
+        //get reservation
         Reservation reservation = reservationRepository2.findById(reservationId).get();
         Spot spot = reservation.getSpot();
-        if(amountSent<reservation.getNumberOfHours()*spot.getPricePerHour())
-            throw new InsufficientAmountException(String.format("Insufficient Amount"));
+        int bill = reservation.getNumberOfHours() * spot.getPricePerHour();
+
+        if(amountSent < bill){
+            throw new Exception("Insufficient Amount");
+        }
 
         PaymentMode paymentMode = null;
         if(mode.toUpperCase().equals(PaymentMode.CASH.toString())) {
@@ -37,14 +36,16 @@ public class PaymentServiceImpl implements PaymentService {
         }else if(mode.toUpperCase().equals(PaymentMode.UPI.toString())) {
             paymentMode = PaymentMode.UPI;
         }else {
-            throw new PaymentNotDetectedException(String.format("Payment mode not detected"));
+            throw new Exception("Payment mode not detected");
         }
+
         Payment payment = new Payment();
-        payment.setPaymentMode(paymentMode);
         payment.setPaymentCompleted(true);
+        payment.setPaymentMode(paymentMode);
         payment.setReservation(reservation);
 
         reservationRepository2.save(reservation);
+
         return payment;
     }
 }

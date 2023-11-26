@@ -1,8 +1,7 @@
 package com.driver.services.impl;
 
-import com.driver.model.ParkingLot;
+import com.driver.model.*;
 import com.driver.model.Spot;
-import com.driver.model.SpotType;
 import com.driver.repository.ParkingLotRepository;
 import com.driver.repository.SpotRepository;
 import com.driver.services.ParkingLotService;
@@ -11,8 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.driver.model.SpotType.*;
 
 @Service
 public class ParkingLotServiceImpl implements ParkingLotService {
@@ -31,28 +28,33 @@ public class ParkingLotServiceImpl implements ParkingLotService {
     @Override
     public Spot addSpot(int parkingLotId, Integer numberOfWheels, Integer pricePerHour) {
         Spot spot = new Spot();
-        SpotType spotType=null;
-        if(numberOfWheels<=2)
+        SpotType spotType = null;
+        if(numberOfWheels <= 2){
             spotType = SpotType.TWO_WHEELER;
-        else if(numberOfWheels<=4)
+        }
+        else if(numberOfWheels <= 4){
             spotType = SpotType.FOUR_WHEELER;
-        else
+        }
+        else{
             spotType = SpotType.OTHERS;
+        }
         spot.setPricePerHour(pricePerHour);
         spot.setSpotType(spotType);
+
+        // get parking lot by id
         ParkingLot parkingLot = parkingLotRepository1.findById(parkingLotId).get();
         spot.setParkingLot(parkingLot);
-        spotRepository1.save(spot);
+
+        // now add this spot to given parking lot
         parkingLot.getSpotList().add(spot);
         parkingLotRepository1.save(parkingLot);
+
         return spot;
     }
 
     @Override
     public void deleteSpot(int spotId) {
         spotRepository1.deleteById(spotId);
-//        ParkingLot parkingLot = spot.getParkingLot();
-//        parkingLot.getSpotList().remove(spot);
     }
 
     @Override
