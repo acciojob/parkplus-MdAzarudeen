@@ -10,7 +10,7 @@ public class Spot {
     int id;
     private SpotType spotType;
     private int price;
-    private boolean occupied;
+    private boolean occupied=false;
     @ManyToOne
     private ParkingLot parkingLot;
     @OneToMany
