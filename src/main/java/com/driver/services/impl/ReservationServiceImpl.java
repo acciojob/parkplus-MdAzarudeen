@@ -37,13 +37,13 @@ public class ReservationServiceImpl implements ReservationService {
             if(!curSpot.isOccupied()){
                 int currTotal = 0;
                 if(numberOfWheels == 2){
-                    currTotal = timeInHours * curSpot.getPrice();
+                    currTotal = timeInHours * curSpot.getPricePerHour();
                 }
                 else if(numberOfWheels == 4 && !curSpot.getSpotType().toString().equals("TWO_WHEELER")){
-                    currTotal = timeInHours * curSpot.getPrice();
+                    currTotal = timeInHours * curSpot.getPricePerHour();
                 }
                 else if(numberOfWheels > 4 && curSpot.getSpotType().toString().equals("OTHERS")){
-                    currTotal = timeInHours * curSpot.getPrice();
+                    currTotal = timeInHours * curSpot.getPricePerHour();
                 }
                 if(currTotal != 0 && currTotal < totalPrice){
                     totalPrice = currTotal;
@@ -57,7 +57,7 @@ public class ReservationServiceImpl implements ReservationService {
         }
 
         Reservation reservation = new Reservation();
-        reservation.setHours(timeInHours);
+        reservation.setNumberOfHours(timeInHours);
         reservation.setUser(user);
         reservation.setSpot(spot);
         spot.setOccupied(true);

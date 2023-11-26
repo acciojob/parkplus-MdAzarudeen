@@ -9,7 +9,7 @@ public class Spot {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     private SpotType spotType;
-    private int price;
+    private int pricePerHour;
     private boolean occupied=false;
     @ManyToOne
     private ParkingLot parkingLot;
@@ -19,10 +19,10 @@ public class Spot {
     public Spot() {
     }
 
-    public Spot(int id, SpotType spotType, int price, boolean occupied, ParkingLot parkingLot, List<Reservation> reservationList) {
+    public Spot(int id, SpotType spotType, int pricePerHour, boolean occupied, ParkingLot parkingLot, List<Reservation> reservationList) {
         this.id = id;
         this.spotType = spotType;
-        this.price = price;
+        this.pricePerHour = pricePerHour;
         this.occupied = occupied;
         this.parkingLot = parkingLot;
         this.reservationList = reservationList;
@@ -44,12 +44,12 @@ public class Spot {
         this.spotType = spotType;
     }
 
-    public int getPrice() {
-        return price;
+    public int getPricePerHour() {
+        return pricePerHour;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setPricePerHour(int price) {
+        this.pricePerHour = price;
     }
 
     public boolean isOccupied() {
