@@ -11,6 +11,7 @@ public class Spot {
     private SpotType spotType;
     private int price;
     private boolean occupied;
+    @ManyToOne
     private ParkingLot parkingLot;
     @OneToMany
     private List<Reservation> reservationList;

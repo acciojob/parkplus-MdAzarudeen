@@ -10,6 +10,7 @@ public class Reservation {
     private int hours;
     @ManyToOne
     private User user;
+    @ManyToOne
     private Spot spot;
     @OneToOne
     private Payment payment;

@@ -1,9 +1,6 @@
 package com.driver.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Payment {
@@ -11,7 +8,9 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     private boolean paymentCompleted;
+    @Enumerated(EnumType.STRING)
     private PaymentMode paymentMode;
+    @OneToOne
     private Reservation reservation;
 
     public Payment() {
